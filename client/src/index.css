@@ -4,14 +4,19 @@ body {
     'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #faf8ed;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+.navbar-bg {
+  background: #99b080;
+}
+
 .navbar-brand {
-  color: #df3ca6;
+  color: #faf8ed;
 }
 
 .navbar-brand img {
@@ -23,23 +28,23 @@ code {
   font-size: 15px;
 }
 
-.btn-primary,
-.bg-primary {
-  background-color: #df3ca6 !important;
+.btn-primary {
+  background-color: #016a70 !important;
   border: none;
 }
 
 .btn-primary:hover {
-  background-color: #df3ca6;
+  background-color: #016a70;
   opacity: 0.9;
 }
 
 .btn-secondary {
-  background-color: #7430f9;
+  background-color: #ff6d60;
+  border: none;
 }
 
 .btn-secondary:hover {
-  background-color: #7430f9;
+  background-color: #ff6d60;
   opacity: 0.9;
 }
 
@@ -48,13 +53,14 @@ code {
 }
 
 .card {
-  max-width: 350px;
-  width: 85%;
-  background: #bfbfbf;
-  padding: 30px;
-  border-radius: 10px;
-  border: 1px solid #bfbfbf;
-  box-shadow: 0px 1px 26px -10px white;
+  max-width: 450px;
+  width: 100%;
+  background: #9eb384;
+  padding: 10px;
+  border-radius: 7px;
+  border: 1px solid #d5d3d3;
+  box-shadow: 0px 0px 10px -5px rgb(119, 121, 119);
+  color: #f7f5f1;
 }
 
 .card .header {
@@ -128,10 +134,6 @@ code {
   border-radius: 25px;
   position: relative;
   overflow: hidden;
-}
-
-.Red {
-  color: #f00;
 }
 
 .load {
