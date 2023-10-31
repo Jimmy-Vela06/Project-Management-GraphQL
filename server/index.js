@@ -17,6 +17,10 @@ connectDB();
 
 app.use(cors());
 
+app.get('/', (req, res) => {
+  res.send('APP IS RUNNING.');
+});
+
 app.use(
   '/graphql',
   graphqlHTTP({
