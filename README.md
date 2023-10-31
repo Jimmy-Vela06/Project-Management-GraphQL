@@ -50,9 +50,10 @@ SO I can organize my projects and increase my productivity.
 ## **Links**
 
 Link to GitHub Repository:
+https://github.com/Jimmy-Vela06/Project-Management-GraphQL
 
 Link to Web Page:
-https://memoriae-mern.net
+
 
 ## **License**
 
