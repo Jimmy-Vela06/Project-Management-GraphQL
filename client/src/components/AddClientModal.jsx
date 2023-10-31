@@ -56,15 +56,15 @@ function AddClientModal() {
             <div className='modal-body'>
               <form onSubmit={onSubmit}>
                 <div className='mb-3'>
-                  <label className='form-label'>Name</label>
+                  <label className='form-label'>Name:</label>
                   <input type='text' className='form-control' id='name' value={name} onChange={(event) => setName(event.target.value)} />
                 </div>
                 <div className='mb-3'>
-                  <label className='form-label'>Email</label>
+                  <label className='form-label'>Email:</label>
                   <input type='text' className='form-control' id='email' value={email} onChange={(event) => setEmail(event.target.value)} />
                 </div>
                 <div className='mb-3'>
-                  <label className='form-label'>Email</label>
+                  <label className='form-label'>Phone:</label>
                   <input type='text' className='form-control' id='phone' value={phone} onChange={(event) => setPhone(event.target.value)} />
                 </div>
 
