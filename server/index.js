@@ -25,8 +25,21 @@ app.use(
   '/graphql',
   graphqlHTTP({
     schema,
-    graphiql: process.env.NODE_ENV === 'development',
+    graphiql: true,
   })
 );
+
+if (process.env.NODE_ENV === 'production') {
+  // Set build folder as static folder
+  app.use(express.static(path.join(__dirname, '../client/build')));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build/index.html'));
+  });
+} else {
+  app.get('/', (req, res) => {
+    res.status(200).json({ message: 'Welcome to the Project...' });
+  });
+}
 
 app.listen(port, console.log(` Server running on port: ${port} 🚀 `.white.bgBrightGreen.bold));
