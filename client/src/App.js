@@ -26,13 +26,13 @@ const cache = new InMemoryCache({
   },
 });
 
-let uri;
+// let uri;
 
-if (process.env.NODE_ENV === 'production') {
-  uri = process.env.REACT_APP_SERVER_GRAPHQL;
-} else {
-  uri = process.env.REACT_APP_CLIENT_GRAPHQL;
-}
+// if (process.env.NODE_ENV === 'production') {
+//   uri = process.env.REACT_APP_SERVER_GRAPHQL;
+// } else {
+//   uri = process.env.REACT_APP_CLIENT_GRAPHQL;
+// }
 
 const client = new ApolloClient({
   uri: '/graphql',
