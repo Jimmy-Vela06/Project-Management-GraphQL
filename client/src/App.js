@@ -35,7 +35,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const client = new ApolloClient({
-  uri,
+  uri: '/graphql',
   cache,
 });
 
