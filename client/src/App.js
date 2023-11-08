@@ -7,42 +7,29 @@ import Home from './pages/Home';
 
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 
-const cache = new InMemoryCache({
-  typePolicies: {
-    query: {
-      fields: {
-        clients: {
-          merge(existing, incoming) {
-            return incoming;
-          },
-        },
-        projects: {
-          merge(existing, incoming) {
-            return incoming;
-          },
-        },
-      },
-    },
-  },
-});
-
-let uri;
-
-if (process.env.NODE_ENV === 'production') {
-  uri = process.env.REACT_APP_SERVER_GRAPHQL;
-} else {
-  uri = process.env.REACT_APP_CLIENT_GRAPHQL;
-}
+// const cache = new InMemoryCache({
+//   typePolicies: {
+//     Query: {
+//       fields: {
+//         clients: {
+//           merge(existing, incoming) {
+//             return incoming;
+//           },
+//         },
+//         projects: {
+//           merge(existing, incoming) {
+//             return incoming;
+//           },
+//         },
+//       },
+//     },
+//   },
+// });
 
 const client = new ApolloClient({
-  uri,
-  cache,
+  uri: '/graphql',
+  cache: new InMemoryCache(),
 });
-
-// const client = new ApolloClient({
-//   uri: 'http://localhost:5001/graphql',
-//   cache,
-// });
 
 function App() {
   return (

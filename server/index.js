@@ -1,45 +1,44 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
-const colors = require('colors');
-const { graphqlHTTP } = require('express-graphql');
+const connectDB = require('./config/connection');
+// const { typeDefs } = require('./schema/index.js');
 const schema = require('./schema/schema.js');
-const connectDB = require('./config/db');
+const db = require('./config/connection');
+
+const { ApolloServer } = require('apollo-server-express');
+const { makeExecutableSchema } = require('@graphql-tools/schema');
+
 const mongoose = require('mongoose');
 
-const port = process.env.PORT || 5001;
+const PORT = process.env.PORT || 5001;
 
-const app = express();
-
-// // Connect to database
 mongoose.set('strictQuery', false); // stops the DeprecationWarning
 connectDB();
 
-app.use(cors());
+// const schema = makeExecutableSchema({ typeDefs });
 
-app.get('/', (req, res) => {
-  res.send('APP IS RUNNING.');
+const server = new ApolloServer({
+  schema,
 });
 
-app.use(
-  '/graphql',
-  graphqlHTTP({
-    schema,
-    graphiql: true,
-  })
-);
+const app = express();
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(cors());
 
-if (process.env.NODE_ENV === 'production') {
-  // Set build folder as static folder
-  app.use(express.static(path.join(__dirname, '../client/build')));
+const startApolloServer = async (schema) => {
+  await server.start();
+  server.applyMiddleware({ app });
 
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build/index.html'));
-  });
-} else {
-  app.get('/', (req, res) => {
-    res.status(200).json({ message: 'Welcome to the Project...' });
-  });
-}
+  app.listen(PORT, console.log(` Server running on port: ${PORT} 🚀 `));
 
-app.listen(port, console.log(` Server running on port: ${port} 🚀 `.white.bgBrightGreen.bold));
+  //   db.once('open', () => {
+  //     app.listen(PORT, () => {
+  //       console.log(`API server running on port ${PORT}!`);
+  //       console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
+  //     });
+  //   });
+};
+
+startApolloServer(schema);
