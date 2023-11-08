@@ -15,6 +15,7 @@ const PORT = process.env.PORT || 5001;
 
 mongoose.set('strictQuery', false); // stops the DeprecationWarning
 connectDB();
+//cdfdsfia
 
 // const schema = makeExecutableSchema({ typeDefs });
 
