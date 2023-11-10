@@ -1,45 +1,40 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
+const db = require('./config/db');
+const { typeDefs, resolvers } = require('./schema/index.js');
+const { ApolloServer } = require('apollo-server-express');
+const path = require('path');
 const colors = require('colors');
-const { graphqlHTTP } = require('express-graphql');
-const schema = require('./schema/schema.js');
-const connectDB = require('./config/db');
-const mongoose = require('mongoose');
 
-const port = process.env.PORT || 5001;
-
+const PORT = process.env.PORT || 5003;
 const app = express();
 
-// // Connect to database
-mongoose.set('strictQuery', false); // stops the DeprecationWarning
-connectDB();
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
-app.use(cors());
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../client/build')));
+}
 
-app.get('/', (req, res) => {
-  res.send('APP IS RUNNING.');
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
 });
 
-app.use(
-  '/graphql',
-  graphqlHTTP({
-    schema,
-    graphiql: true,
-  })
-);
+const startApolloServer = async () => {
+  await server.start();
+  server.applyMiddleware({ app });
 
-// if (process.env.NODE_ENV === 'production') {
-//   // Set build folder as static folder
-//   app.use(express.static(path.join(__dirname, '../client/build')));
+  // Your database connection logic
+  db.once('open', () => {
+    console.log('Apollo Server Connected to MongoDB');
+  });
 
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../client/build/index.html'));
-});
-// } else {
-//   app.get('/', (req, res) => {
-//     res.status(200).json({ message: 'Welcome to the Project...' });
-//   });
-// }
+  // Start the Apollo Server integrated with Express
+  await new Promise((resolve) => app.listen({ port: PORT }, resolve));
+  console.log(`API server running on port ${PORT}!`.cyan.bold);
+  console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`.underline.bold);
+};
 
-app.listen(port, console.log(` Server running on port: ${port} 🚀 `.white.bgBrightGreen.bold));
+startApolloServer();
