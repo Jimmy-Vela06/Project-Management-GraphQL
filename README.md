@@ -30,14 +30,6 @@ The Project Management App is designed to streamline project management and enha
 - GraphQL
 - lottie-react
 
-## **User_Story**
-
-```
-AS A to mangae my clients and prjoects
-I WANT to bee able add new clients/ prjects and be able to preform CRUD operations with them.
-SO I can organize my projects and increase my productivity.
-```
-
 ## **Images**
 
 <img src="./assets/home.png" width=60%>
