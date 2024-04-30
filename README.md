@@ -8,8 +8,6 @@
 
 ### [Technologies_Used](#technologies_used)
 
-### [User_Story](#user_story)
-
 ### [Images](#images)
 
 ### [Links](#links)
